@@ -1,166 +1,111 @@
-local path = 'hud/deimos/'
-local startAmimStep = 304
-local curHealth = 6
-local addHealth_ = 0
-
-function onCreate()
-	runHaxeCode([[
-		FlxG.cameras.remove(game.camHUD,false);
-		FlxG.cameras.remove(game.camOther,false);
-		
-		var camHUD2:FlxCamera =new FlxCamera(0, 0, FlxG.width, FlxG.height);
-		camHUD2.bgColor=0x00;
-		setVar("camHUD2",camHUD2);
-		
-		FlxG.cameras.add(camHUD2,false);
-		FlxG.cameras.add(game.camHUD,false);
-		FlxG.cameras.add(game.camOther,false);
-	]])
-	setProperty('skipCountdown', true)
-end
+AnimStartStep = 916
 
 function onCreatePost()
-	for i = 0, getProperty('playerStrums.length')-1 do
-		setPropertyFromGroup('playerStrums', i, 'texture', "deimosBF");
-	end
-	for i = 0, getProperty('unspawnNotes.length')-1 do
-		if getPropertyFromGroup('unspawnNotes', i, 'mustPress') then
-			setPropertyFromGroup('unspawnNotes', i, 'texture', "deimosBF");
-			setPropertyFromGroup('unspawnNotes', i, 'noteSplashTexture', "skins/deimos/bf/bfSplash");
-		end
-	end
-	for i = 0, getProperty('opponentStrums.length')-1 do
-		setPropertyFromGroup('opponentStrums', i, 'texture', "deimos");
-	end
-	for i = 0, getProperty('unspawnNotes.length')-1 do
-		if getPropertyFromGroup('unspawnNotes', i, 'mustPress') == false then
-			setPropertyFromGroup('unspawnNotes', i, 'texture', "deimos");
-		end
-	end
-	if not downscroll then
-		makeLuaSprite('barTop', path..'barTop', -67, 865)
-		makeLuaSprite('barDown', path..'barDown', -47, -455)
-		makeAnimatedLuaSprite('bar', path..'bar', 880, 755)
-		setProperty('barTop.flipY', true)
-		setProperty('barDown.flipY', true)
-	else
-		makeLuaSprite('barTop', path..'barTop', -45.5, -455)
-		makeLuaSprite('barDown', path..'barDown', -47, 800)
-		makeAnimatedLuaSprite('bar', path..'bar-down', 875, -270)
-	end
+	makeAnimatedLuaSprite('deimosShot', 'bg/deimos/deimos/deimos-assets-pack', -765, -25)
+	addAnimationByPrefix('deimosShot', 'shot1', 'shot 1', 24, false)
+	addLuaSprite('deimosShot', true)
 	
-	addLuaSprite('barDown', false)
-	scaleObject('barDown', 0.6665, 0.6665)
+	makeAnimatedLuaSprite('bfTrans', 'characters/nega-bf', 505, -25)
+	addAnimationByPrefix('bfTrans', 'shot1', 'bf trans', 24, false)
+	addLuaSprite('bfTrans', true)
 	
-	addLuaSprite('barTop', false)
-	scaleObject('barTop', 0.6665, 0.6665)
-	
-	addLuaSprite('bar', false)
-	scaleObject('bar', 0.5, 0.5)
-	
-	for i = 0, 6 do addAnimationByPrefix('bar', 'health_'..i, i..'0', 24, true); end
-	addAnimationByPrefix('bar', 'load', 'load', 24, false);
-	addAnimationByPrefix('bar', 'die', 'die', 24, false);
-	playAnim('bar', 'health_0')
-	
-	makeLuaText('scoreText', '', 150, 0, (downscroll and -235 or 920))
-	addLuaText('scoreText')
-	setTextSize('scoreText', 40)
-	setTextFont('scoreText', 'impact.ttf')
-	setTextAlignment('scoreText', 'center');
-	setTextColor('scoreText', 'FF0055')
-	screenCenter('scoreText', 'X')
-	
-	makeLuaSprite('scoreValue');
-	addLuaSprite('scoreValue');
-	setProperty('scoreValue.alpha', 0)
-	
-	setProperty('iconP1.visible', false)
-	setProperty('iconP2.visible', false)
-	setProperty('healthBar.visible', false)
-	setProperty('healthBarBG.visible', false)
-	setProperty('timeTxt.visible', false)
-	setProperty('timeBar.visible', false)
-	setProperty('timeBarBG.visible', false)
-	setProperty('scoreTxt.visible', false)
-	setProperty('camHUD.alpha', 1)
-	for i = 0,7 do
-	noteTweenAlpha(i, i, 0, 0.1,"linear")
-	end
-	setProperty('showRating', false)
-	setProperty('showComboNum', false)
+	makeAnimatedLuaSprite('chains', 'bg/deimos/chains', -1735, -1835)
+	addAnimationByPrefix('chains', 'in', 'chains', 24, false)
+	addLuaSprite('chains', true)
 
-	runHaxeCode([[
-		var shaderName = "textGlitch";
-		
-		game.initLuaShader(shaderName);
+	makeAnimatedLuaSprite('gfText', 'hud/deimos/gfText', 70, 445)
+	addAnimationByPrefix('gfText', 'shot1', 'GF TEXT', 24, false)
+	setObjectCamera('gfText', 'other')
+	scaleObject("gfText", 0.666288308740068, 0.666288308740068)
+	addLuaSprite('gfText', true)
+
+	makeAnimatedLuaSprite('polvo', 'bg/deimos/polvo', -421, 123)
+	addAnimationByPrefix('polvo', 'idle', 'polvo', 24, false)
+	addLuaSprite('polvo', true)
 	
-		var shader0 = game.createRuntimeShader(shaderName);
-		game.getLuaObject("scoreText").shader = shader0;
-		setVar('shader0', shader0);
-		
-		game.getLuaObject('scoreText').cameras = [getVar('camHUD2')];
-		game.getLuaObject('bar').cameras = [getVar('camHUD2')];
-		game.getLuaObject('barDown').cameras = [getVar('camHUD2')];
-		game.getLuaObject('barTop').cameras = [getVar('camHUD2')];
-	]])
+	makeAnimatedLuaSprite('piedra', 'bg/deimos/piedra', 61, -1151)
+	addAnimationByPrefix('piedra', 'out', 'pilar out', 24, false)
+	addAnimationByPrefix('piedra', 'in', 'pilar in', 24, false)
+	addLuaSprite('piedra', true)
+	
+	makeAnimatedLuaSprite('mira', 'bg/deimos/mira', 205, -275)
+	addAnimationByPrefix('mira', 'shot', 'alert shoot', 24, false)
+	addLuaSprite('mira', true)
+
+	setProperty('polvo.alpha', 0.00001)
+	setProperty('deimosShot.alpha', 0.00001)
+	setProperty('gfText.alpha', 0.00001)
+	setProperty('piedra.alpha', 0.00001)
+	setProperty('bfTrans.alpha', 0.00001)
+	setProperty('mira.alpha', 0.00001)
+	setProperty('chains.alpha', 0.00001)
 end
 
 function onStepHit()
-	if curStep == startAmimStep-25 then
-		doTweenY('top', 'barTop', (downscroll and -155 or 565), 3, 'cubeinout')
-		doTweenY('but', 'barDown', (downscroll and 500 or -155), 3, 'cubeinout')
-		doTweenY('bar', 'bar', (downscroll and 30 or 455), 3, 'cubeinout')
-		doTweenY('score', 'scoreText', (downscroll and 65 or 620), 3, 'cubeinout')
-	end
-	if curStep == startAmimStep+12 then
-		playAnim('bar', 'load')
-	end
-end
-
-function goodNoteHit(id, data, type, hold)
-	if not hold then
-		doTweenX('scoreValue', 'scoreValue', score, 0.5)
-	end
-	addHealth_ = addHealth_ + 1
-	if addHealth_ > 5 then
-		addHealth_ = 1
-		if curHealth < 6 then
-			curHealth = curHealth + 1
-		end
-	end
-	if not botPlay then
-	noteTweenY(data..'note', data+4, defaultOpponentStrumY1 + (downscroll and 15 or 15), 0.15)
-	end
-end
-
-function noteMiss(id, data, type, hold)
-	curHealth = curHealth - 1
-	if curHealth < 1 then
-		addHealth(-114514)
+	if curStep == AnimStartStep then
+		setProperty('mira.alpha', 1)
+		playSound('mira', 1, 'mira')
+		soundFadeIn('mira', 0.7, 0, 1)
+		playAnim('mira', 'shot')
+	elseif curStep == AnimStartStep + 28 then
+		setProperty('dad.visible', false)
+		setProperty('boyfriend.visible', false)
+		
+		setProperty('deimosShot.alpha', 1)
+		playAnim('deimosShot', 'shot1')
+		playSound("deimosShot")
+		
+		setProperty('bfTrans.alpha', 1)
+		playAnim('bfTrans', 'shot1')
+		
+		triggerEvent('Play Animation', 'shoot', 'gf')
+	elseif curStep == AnimStartStep + 32 then
+		setProperty('chains.alpha', 1)
+		playAnim('chains', 'in')
+	elseif curStep == AnimStartStep + 36 then
+		setProperty('piedra.alpha', 1)
+		playAnim('piedra', 'in')
+	elseif curStep == AnimStartStep + 60 then
+		playAnim('piedra', 'out')
 	end
 end
 
 function onUpdatePost()
-	runHaxeCode([[
-		getVar('shader0').setFloat('iTime', ]]..os.clock()..[[);
-	]])
-	
-	setTextString('scoreText', math.floor(getProperty('scoreValue.x')))
-	
-	if getProperty('bar.animation.curAnim.name') ~= ('die' or 'load') and curStep > startAmimStep+14 then
-		playAnim('bar', 'health_'..curHealth)
-	end	
-	
-	resetKey()
-	setProperty('camHUD2.zoom', getProperty('camHUD.zoom'))
+	if curStep >= AnimStartStep and curStep < AnimStartStep + 70 then
+		if getProperty('deimosShot.animation.curAnim.finished') and getProperty('deimosShot.alpha') == 1 then
+			removeLuaSprite('deimosShot', true)
+			setProperty('dad.visible', true)
+		end
+		if getProperty('chains.animation.curAnim.finished') and getProperty('chains.alpha') == 1 then
+			removeLuaSprite('chains', true)
+		end
+		if getProperty('chains.animation.curAnim.name') == 'out' and getProperty('chains.animation.curAnim.finished') and getProperty('chains.alpha') == 1 then
+			removeLuaSprite('chains', true)
+		end
+		if getProperty('gf.animation.curAnim.name') == 'shoot' then
+			if getProperty('gf.animation.curAnim.finished') then
+				triggerEvent('Play Animation', 'angry', 'gf')
+				triggerEvent('Alt Idle Animation', 'gf', '-alt')
+				
+				setProperty('gfText.alpha', 1)
+				playAnim('gfText', 'shot1')
+				playSound('gfangry', 2)
+			end
+		end
+		if getProperty('gfText.animation.curAnim.finished') and getProperty('gfText.alpha') == 1 then
+			removeLuaSprite('gfText', true)
+		end
+		if getProperty('bfTrans.animation.curAnim.finished') and getProperty('bfTrans.alpha') == 1 then
+			removeLuaSprite('bfTrans', true)
+			--setProperty('boyfriend.visible', true)
+		end
+	end
 end
 
-local key = {'left', 'down', 'up', 'right'}
-function resetKey()
-	for i = 1, 4 do
-		if keyReleased(key[i]) then
-			noteTweenY((i-1)..'note', i+3, defaultOpponentStrumY1, 0.15)
+function onEvent(n, one, two)
+	if n == 'Change Character' then
+		if two == 'nega-pico-player' then
+			triggerEvent('Play Animation', 'hey', 'bf')
 		end
 	end
 end

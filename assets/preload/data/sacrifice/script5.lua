@@ -1,113 +1,166 @@
-followchars = true
-testMode = false
-dad = {
-	x = -227,
-	y = 202,
-	size = 0,
-	resizeCam = false,
-	offset = 20
-}
-gf = {
-	x = 1270,
-	y = 150,
-	allow = true,
-	size = 0.9,
-	resizeCam = false,
-	offset = 15
-}
-bf = {
-	x = 553,
-	y = 202,
-	resizeCam = false,
-	size = 0,
-	offset = 20
-}
-customFocus = false
-moveChar = 'bf'
+local path = 'hud/deimos/'
+local startAmimStep = 304
+local curHealth = 6
+local addHealth_ = 0
 
-function setNewFocus(char)
-	if char == '' then
-		customFocus = false
+function onCreate()
+	runHaxeCode([[
+		FlxG.cameras.remove(game.camHUD,false);
+		FlxG.cameras.remove(game.camOther,false);
+		
+		var camHUD2:FlxCamera =new FlxCamera(0, 0, FlxG.width, FlxG.height);
+		camHUD2.bgColor=0x00;
+		setVar("camHUD2",camHUD2);
+		
+		FlxG.cameras.add(camHUD2,false);
+		FlxG.cameras.add(game.camHUD,false);
+		FlxG.cameras.add(game.camOther,false);
+	]])
+	setProperty('skipCountdown', true)
+end
+
+function onCreatePost()
+	for i = 0, getProperty('playerStrums.length')-1 do
+		setPropertyFromGroup('playerStrums', i, 'texture', "deimosBF");
+	end
+	for i = 0, getProperty('unspawnNotes.length')-1 do
+		if getPropertyFromGroup('unspawnNotes', i, 'mustPress') then
+			setPropertyFromGroup('unspawnNotes', i, 'texture', "deimosBF");
+			setPropertyFromGroup('unspawnNotes', i, 'noteSplashTexture', "skins/deimos/bf/bfSplash");
+		end
+	end
+	for i = 0, getProperty('opponentStrums.length')-1 do
+		setPropertyFromGroup('opponentStrums', i, 'texture', "deimos");
+	end
+	for i = 0, getProperty('unspawnNotes.length')-1 do
+		if getPropertyFromGroup('unspawnNotes', i, 'mustPress') == false then
+			setPropertyFromGroup('unspawnNotes', i, 'texture', "deimos");
+		end
+	end
+	if not downscroll then
+		makeLuaSprite('barTop', path..'barTop', -67, 865)
+		makeLuaSprite('barDown', path..'barDown', -47, -455)
+		makeAnimatedLuaSprite('bar', path..'bar', 880, 755)
+		setProperty('barTop.flipY', true)
+		setProperty('barDown.flipY', true)
 	else
-		customFocus = true
-		moveChar = char
+		makeLuaSprite('barTop', path..'barTop', -45.5, -455)
+		makeLuaSprite('barDown', path..'barDown', -47, 800)
+		makeAnimatedLuaSprite('bar', path..'bar-down', 875, -270)
+	end
+	
+	addLuaSprite('barDown', false)
+	scaleObject('barDown', 0.6665, 0.6665)
+	
+	addLuaSprite('barTop', false)
+	scaleObject('barTop', 0.6665, 0.6665)
+	
+	addLuaSprite('bar', false)
+	scaleObject('bar', 0.5, 0.5)
+	
+	for i = 0, 6 do addAnimationByPrefix('bar', 'health_'..i, i..'0', 24, true); end
+	addAnimationByPrefix('bar', 'load', 'load', 24, false);
+	addAnimationByPrefix('bar', 'die', 'die', 24, false);
+	playAnim('bar', 'health_0')
+	
+	makeLuaText('scoreText', '', 150, 0, (downscroll and -235 or 920))
+	addLuaText('scoreText')
+	setTextSize('scoreText', 40)
+	setTextFont('scoreText', 'impact.ttf')
+	setTextAlignment('scoreText', 'center');
+	setTextColor('scoreText', 'FF0055')
+	screenCenter('scoreText', 'X')
+	
+	makeLuaSprite('scoreValue');
+	addLuaSprite('scoreValue');
+	setProperty('scoreValue.alpha', 0)
+	
+	setProperty('iconP1.visible', false)
+	setProperty('iconP2.visible', false)
+	setProperty('healthBar.visible', false)
+	setProperty('healthBarBG.visible', false)
+	setProperty('timeTxt.visible', false)
+	setProperty('timeBar.visible', false)
+	setProperty('timeBarBG.visible', false)
+	setProperty('scoreTxt.visible', false)
+	setProperty('camHUD.alpha', 1)
+	for i = 0,7 do
+	noteTweenAlpha(i, i, 0, 0.1,"linear")
+	end
+	setProperty('showRating', false)
+	setProperty('showComboNum', false)
+
+	runHaxeCode([[
+		var shaderName = "textGlitch";
+		
+		game.initLuaShader(shaderName);
+	
+		var shader0 = game.createRuntimeShader(shaderName);
+		game.getLuaObject("scoreText").shader = shader0;
+		setVar('shader0', shader0);
+		
+		game.getLuaObject('scoreText').cameras = [getVar('camHUD2')];
+		game.getLuaObject('bar').cameras = [getVar('camHUD2')];
+		game.getLuaObject('barDown').cameras = [getVar('camHUD2')];
+		game.getLuaObject('barTop').cameras = [getVar('camHUD2')];
+	]])
+end
+
+function onStepHit()
+	if curStep == startAmimStep-25 then
+		doTweenY('top', 'barTop', (downscroll and -155 or 565), 3, 'cubeinout')
+		doTweenY('but', 'barDown', (downscroll and 500 or -155), 3, 'cubeinout')
+		doTweenY('bar', 'bar', (downscroll and 30 or 455), 3, 'cubeinout')
+		doTweenY('score', 'scoreText', (downscroll and 65 or 620), 3, 'cubeinout')
+	end
+	if curStep == startAmimStep+12 then
+		playAnim('bar', 'load')
+	end
+end
+
+function goodNoteHit(id, data, type, hold)
+	if not hold then
+		doTweenX('scoreValue', 'scoreValue', score, 0.5)
+	end
+	addHealth_ = addHealth_ + 1
+	if addHealth_ > 5 then
+		addHealth_ = 1
+		if curHealth < 6 then
+			curHealth = curHealth + 1
+		end
+	end
+	if not botPlay then
+	noteTweenY(data..'note', data+4, defaultOpponentStrumY1 + (downscroll and 15 or 15), 0.15)
+	end
+end
+
+function noteMiss(id, data, type, hold)
+	curHealth = curHealth - 1
+	if curHealth < 1 then
+		addHealth(-114514)
 	end
 end
 
 function onUpdatePost()
-	if getProperty('cameraSpeed') > 8 then
-		followchars = false else followchars = true end
+	runHaxeCode([[
+		getVar('shader0').setFloat('iTime', ]]..os.clock()..[[);
+	]])
 	
-	if testMode then
-		followchars = false if keyPressed('left') then setProperty('camFollow.x', getProperty('camFollow.x')-10) elseif keyPressed('right') then setProperty('camFollow.x', getProperty('camFollow.x')+10) elseif keyPressed('up') then setProperty('camFollow.y', getProperty('camFollow.y')-10) elseif keyPressed('down') then setProperty('camFollow.y', getProperty('camFollow.y')+10) end debugPrint('x; '..getProperty('camFollow.x')..', ', 'y; '..getProperty('camFollow.y')..', '); setPropertyFromClass('Conductor', 'songPosition', 1); setPropertyFromClass('flixel.FlxG', 'sound.music.time', 1); setProperty('vocals.time', 1); setPropertyFromClass('flixel.FlxG', 'sound.music.volume', 0); setProperty('vocals.volume', 0)
-	end
+	setTextString('scoreText', math.floor(getProperty('scoreValue.x')))
 	
-	if followchars == true then
-		if not customFocus then
-			if mustHitSection then
-				moveChar = 'bf'
-			else
-				moveChar = 'dad'
-			end
-		end
-			
-		if gfSection then
-			setNewFocus('gf')
-		else
-			setNewFocus('')
-		end
-		
-		if moveChar == 'bf' then
-			if getProperty('boyfriend.animation.curAnim.name') == 'singLEFT' then
-				triggerEvent('Camera Follow Pos', bf.x-bf.offset, bf.y)
-			elseif getProperty('boyfriend.animation.curAnim.name') == 'singRIGHT' then
-				triggerEvent('Camera Follow Pos', bf.x+bf.offset, bf.y)
-			elseif getProperty('boyfriend.animation.curAnim.name') == 'singUP' then
-				triggerEvent('Camera Follow Pos', bf.x, bf.y-bf.offset)
-			elseif getProperty('boyfriend.animation.curAnim.name') == 'singDOWN' then
-				triggerEvent('Camera Follow Pos', bf.x, bf.y+bf.offset)
-			else
-				triggerEvent('Camera Follow Pos', bf.x, bf.y)
-			end
-			if bf.resizeCam then setProperty('defaultCamZoom', bf.size) end
-		elseif moveChar == 'dad' then
-			if getProperty('dad.animation.curAnim.name') == 'singLEFT' then
-				triggerEvent('Camera Follow Pos', dad.x-dad.offset, dad.y)
-			elseif getProperty('dad.animation.curAnim.name') == 'singRIGHT' then
-				triggerEvent('Camera Follow Pos', dad.x+dad.offset, dad.y)
-			elseif getProperty('dad.animation.curAnim.name') == 'singUP' then
-				triggerEvent('Camera Follow Pos', dad.x, dad.y-dad.offset)
-			elseif getProperty('dad.animation.curAnim.name') == 'singDOWN' then
-				triggerEvent('Camera Follow Pos', dad.x, dad.y+dad.offset)
-			else
-				triggerEvent('Camera Follow Pos', dad.x, dad.y)
-			end
-			if dad.resizeCam then setProperty('defaultCamZoom', dad.size) end
-		elseif moveChar == 'gf' then
-			if getProperty('gf.animation.curAnim.name') == 'singLEFT' then
-				triggerEvent('Camera Follow Pos', gf.x-gf.offset, gf.y)
-			elseif getProperty('gf.animation.curAnim.name') == 'singRIGHT' then
-				triggerEvent('Camera Follow Pos', gf.x+gf.offset, gf.y)
-			elseif getProperty('gf.animation.curAnim.name') == 'singUP' then
-				triggerEvent('Camera Follow Pos', gf.x, gf.y-gf.offset)
-			elseif getProperty('gf.animation.curAnim.name') == 'singDOWN' then
-				triggerEvent('Camera Follow Pos', gf.x, gf.y+gf.offset)
-			end
-			if gf.resizeCam then setProperty('defaultCamZoom', gf.size) end
-		end
-	else
-		triggerEvent('Camera Follow Pos', '', '')
-	end
+	if getProperty('bar.animation.curAnim.name') ~= ('die' or 'load') and curStep > startAmimStep+14 then
+		playAnim('bar', 'health_'..curHealth)
+	end	
+	
+	resetKey()
+	setProperty('camHUD2.zoom', getProperty('camHUD.zoom'))
 end
 
-function onStepHit()
-	if curStep == 952 then
-		followchars = false
-		triggerEvent('Camera Follow Pos', 610, 202)
-		doTweenZoom('camGameZ', 'camGame', 1, 3, 'smoothstepinout')
-	elseif curStep == 976 then
-		followchars = true
-		triggerEvent('Camera Follow Pos', '', '')
-		doTweenZoom('camGameZ', 'camGame', 0.569999999999997, 1.1, 'smoothstepinout')
+local key = {'left', 'down', 'up', 'right'}
+function resetKey()
+	for i = 1, 4 do
+		if keyReleased(key[i]) then
+			noteTweenY((i-1)..'note', i+3, defaultOpponentStrumY1, 0.15)
+		end
 	end
 end
