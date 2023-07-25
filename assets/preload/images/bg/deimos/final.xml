@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="final.png">
+<SubTexture name="cadenas0000" x="0" y="0" width="359" height="216" frameX="0" frameY="0" frameWidth="360" frameHeight="218" />
+<SubTexture name="cadenas0001" x="359" y="0" width="348" height="191" frameX="-12" frameY="-26" frameWidth="360" frameHeight="218" />
+<SubTexture name="cadenas0002" x="707" y="0" width="346" height="190" frameX="-14" frameY="-28" frameWidth="360" frameHeight="218" />
+<SubTexture name="cadenas0003" x="707" y="0" width="346" height="190" frameX="-14" frameY="-28" frameWidth="360" frameHeight="218" />
+<SubTexture name="cadenas0004" x="347" y="407" width="347" height="190" frameX="-13" frameY="-27" frameWidth="360" frameHeight="218" />
+<SubTexture name="cadenas0005" x="347" y="407" width="347" height="190" frameX="-13" frameY="-27" frameWidth="360" frameHeight="218" />
+<SubTexture name="cadenas0006" x="0" y="216" width="347" height="191" frameX="-13" frameY="-27" frameWidth="360" frameHeight="218" />
+<SubTexture name="cadenas0007" x="0" y="216" width="347" height="191" frameX="-13" frameY="-27" frameWidth="360" frameHeight="218" />
+<SubTexture name="cadenas0008" x="0" y="216" width="347" height="191" frameX="-13" frameY="-27" frameWidth="360" frameHeight="218" />
+<SubTexture name="cadenas0009" x="347" y="216" width="347" height="191" frameX="-13" frameY="-27" frameWidth="360" frameHeight="218" />
+<SubTexture name="cadenas0010" x="347" y="216" width="347" height="191" frameX="-13" frameY="-27" frameWidth="360" frameHeight="218" />
+<SubTexture name="cadenas0011" x="347" y="216" width="347" height="191" frameX="-13" frameY="-27" frameWidth="360" frameHeight="218" />
+<SubTexture name="cadenas0012" x="347" y="216" width="347" height="191" frameX="-13" frameY="-27" frameWidth="360" frameHeight="218" />
+<SubTexture name="cadenas0013" x="347" y="216" width="347" height="191" frameX="-13" frameY="-27" frameWidth="360" frameHeight="218" />
+<SubTexture name="cadenas0014" x="0" y="407" width="347" height="191" frameX="-13" frameY="-27" frameWidth="360" frameHeight="218" />
+<SubTexture name="cadenas0015" x="0" y="407" width="347" height="191" frameX="-13" frameY="-27" frameWidth="360" frameHeight="218" />
+</TextureAtlas>

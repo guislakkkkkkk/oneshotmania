@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="piedra.png">
+<SubTexture name="pilar in0000" x="200" y="397" width="136" height="310" frameX="-108" frameY="0" frameWidth="259" frameHeight="449" />
+<SubTexture name="pilar in0001" x="757" y="310" width="237" height="306" frameX="-22" frameY="-144" frameWidth="259" frameHeight="449" />
+<SubTexture name="pilar in0002" x="1012" y="0" width="243" height="306" frameX="-16" frameY="-144" frameWidth="259" frameHeight="449" />
+<SubTexture name="pilar in0003" x="336" y="397" width="255" height="310" frameX="0" frameY="-140" frameWidth="259" frameHeight="449" />
+<SubTexture name="pilar in0004" x="336" y="397" width="255" height="310" frameX="0" frameY="-140" frameWidth="259" frameHeight="449" />
+<SubTexture name="pilar in0005" x="757" y="0" width="255" height="310" frameX="0" frameY="-140" frameWidth="259" frameHeight="449" />
+<SubTexture name="pilar in0006" x="757" y="0" width="255" height="310" frameX="0" frameY="-140" frameWidth="259" frameHeight="449" />
+<SubTexture name="pilar in0007" x="757" y="0" width="255" height="310" frameX="0" frameY="-140" frameWidth="259" frameHeight="449" />
+<SubTexture name="pilar in0008" x="757" y="0" width="255" height="310" frameX="0" frameY="-140" frameWidth="259" frameHeight="449" />
+<SubTexture name="pilar out0000" x="0" y="397" width="200" height="354" frameX="-56" frameY="-140" frameWidth="259" frameHeight="641" />
+<SubTexture name="pilar out0001" x="0" y="397" width="200" height="354" frameX="-56" frameY="-140" frameWidth="259" frameHeight="641" />
+<SubTexture name="pilar out0002" x="0" y="0" width="151" height="397" frameX="-97" frameY="82" frameWidth="259" frameHeight="641" />
+<SubTexture name="pilar out0003" x="0" y="0" width="151" height="397" frameX="-96" frameY="82" frameWidth="259" frameHeight="641" />
+<SubTexture name="pilar out0004" x="151" y="0" width="151" height="397" frameX="-96" frameY="91" frameWidth="259" frameHeight="641" />
+<SubTexture name="pilar out0005" x="302" y="0" width="151" height="397" frameX="-96" frameY="109" frameWidth="259" frameHeight="641" />
+<SubTexture name="pilar out0006" x="454" y="0" width="151" height="397" frameX="-96" frameY="132" frameWidth="259" frameHeight="641" />
+<SubTexture name="pilar out0007" x="605" y="0" width="151" height="397" frameX="-96" frameY="148" frameWidth="259" frameHeight="641" />
+</TextureAtlas>

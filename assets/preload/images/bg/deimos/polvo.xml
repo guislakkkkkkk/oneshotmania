@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="polvo.png">
+<SubTexture name="polvo0000" x="0" y="530" width="302" height="35" frameX="-151" frameY="-70" frameWidth="604" frameHeight="108" />
+<SubTexture name="polvo0001" x="0" y="474" width="394" height="56" frameX="-105" frameY="-50" frameWidth="604" frameHeight="108" />
+<SubTexture name="polvo0002" x="0" y="474" width="394" height="56" frameX="-105" frameY="-50" frameWidth="604" frameHeight="108" />
+<SubTexture name="polvo0003" x="0" y="392" width="491" height="81" frameX="-57" frameY="-27" frameWidth="604" frameHeight="108" />
+<SubTexture name="polvo0004" x="0" y="392" width="491" height="81" frameX="-57" frameY="-27" frameWidth="604" frameHeight="108" />
+<SubTexture name="polvo0005" x="0" y="301" width="551" height="91" frameX="-27" frameY="-17" frameWidth="604" frameHeight="108" />
+<SubTexture name="polvo0006" x="0" y="301" width="551" height="91" frameX="-27" frameY="-17" frameWidth="604" frameHeight="108" />
+<SubTexture name="polvo0007" x="0" y="207" width="570" height="93" frameX="-17" frameY="-15" frameWidth="604" frameHeight="108" />
+<SubTexture name="polvo0008" x="0" y="207" width="570" height="93" frameX="-17" frameY="-15" frameWidth="604" frameHeight="108" />
+<SubTexture name="polvo0009" x="0" y="108" width="585" height="99" frameX="-10" frameY="-10" frameWidth="604" frameHeight="108" />
+<SubTexture name="polvo0010" x="0" y="108" width="585" height="99" frameX="-10" frameY="-10" frameWidth="604" frameHeight="108" />
+<SubTexture name="polvo0011" x="0" y="0" width="604" height="108" frameX="0" frameY="0" frameWidth="604" frameHeight="108" />
+<SubTexture name="polvo0012" x="0" y="0" width="604" height="108" frameX="0" frameY="0" frameWidth="604" frameHeight="108" />
+</TextureAtlas>

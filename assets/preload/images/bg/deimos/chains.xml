@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="chains.png">
+<SubTexture name="chains0000" x="504" y="0" width="505" height="404" frameX="0" frameY="0" frameWidth="687" frameHeight="573" />
+<SubTexture name="chains0001" x="504" y="0" width="505" height="404" frameX="0" frameY="0" frameWidth="687" frameHeight="573" />
+<SubTexture name="chains0002" x="0" y="406" width="505" height="404" frameX="-121" frameY="-96" frameWidth="687" frameHeight="573" />
+<SubTexture name="chains0003" x="0" y="406" width="505" height="404" frameX="-121" frameY="-96" frameWidth="687" frameHeight="573" />
+<SubTexture name="chains0004" x="0" y="0" width="504" height="406" frameX="-183" frameY="-145" frameWidth="687" frameHeight="573" />
+<SubTexture name="chains0005" x="0" y="0" width="504" height="406" frameX="-183" frameY="-145" frameWidth="687" frameHeight="573" />
+<SubTexture name="chains0006" x="0" y="0" width="504" height="406" frameX="-183" frameY="-145" frameWidth="687" frameHeight="573" />
+<SubTexture name="chains0007" x="0" y="0" width="504" height="406" frameX="-178" frameY="-142" frameWidth="687" frameHeight="573" />
+<SubTexture name="chains0008" x="0" y="0" width="504" height="406" frameX="-178" frameY="-142" frameWidth="687" frameHeight="573" />
+<SubTexture name="chains0009" x="0" y="0" width="504" height="406" frameX="-97" frameY="-109" frameWidth="687" frameHeight="573" />
+<SubTexture name="chains0010" x="0" y="0" width="504" height="406" frameX="-97" frameY="-109" frameWidth="687" frameHeight="573" />
+<SubTexture name="chains0011" x="816" y="406" width="149" height="267" frameX="-327" frameY="-292" frameWidth="687" frameHeight="573" />
+<SubTexture name="chains0012" x="816" y="406" width="149" height="267" frameX="-327" frameY="-292" frameWidth="687" frameHeight="573" />
+<SubTexture name="chains0013" x="664" y="406" width="152" height="297" frameX="-328" frameY="-270" frameWidth="687" frameHeight="573" />
+<SubTexture name="chains0014" x="505" y="406" width="159" height="301" frameX="-328" frameY="-270" frameWidth="687" frameHeight="573" />
+<SubTexture name="chains0015" x="1009" y="0" width="160" height="246" frameX="-294" frameY="-245" frameWidth="687" frameHeight="573" />
+<SubTexture name="chains0016" x="1009" y="246" width="16" height="9" frameX="-431" frameY="-479" frameWidth="687" frameHeight="573" />
+<SubTexture name="chains0017" x="1009" y="246" width="16" height="9" frameX="-431" frameY="-479" frameWidth="687" frameHeight="573" />
+<SubTexture name="chains0018" x="1026" y="246" width="12" height="8" frameX="-425" frameY="-481" frameWidth="687" frameHeight="573" />
+</TextureAtlas>
