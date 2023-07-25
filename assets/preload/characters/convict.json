@@ -1,0 +1,89 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "idle",
+			"fps": 24,
+			"indices": [],
+			"name": "idle"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				64,
+				37
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"indices": [],
+			"name": "up"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				175,
+				-99
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"indices": [],
+			"name": "left"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				7,
+				-28
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"indices": [],
+			"name": "right"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				78,
+				-145
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"indices": [],
+			"name": "down"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "nene",
+			"fps": 24,
+			"indices": [],
+			"name": "nene"
+		}
+	],
+	"no_antialiasing": true,
+	"image": "characters/convict",
+	"position": [
+		320,
+		260
+	],
+	"healthicon": "convict",
+	"flip_x": false,
+	"healthbar_colors": [
+		39,
+		42,
+		123
+	],
+	"camera_position": [
+		-130,
+		-160
+	],
+	"sing_duration": 6.1,
+	"scale": 2
+}
